@@ -162,6 +162,14 @@ def load_data():
     return df
 
 df = load_data()
+expected_dtypes = {
+    "order_id": str,
+    "customer_id": str,
+    "order_purchase_timestamp": "datetime64[ns]",
+    "order_month": str,
+    "year": int,
+    "payment_value": float
+}
 
 # --- Sidebar: filter ---
 st.sidebar.header("🔧 Filter")
