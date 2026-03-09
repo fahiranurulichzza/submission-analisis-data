@@ -171,6 +171,24 @@ expected_dtypes = {
     "payment_value": float
 }
 
+for col, dtype in expected_dtypes.items():
+    if col in df.columns:
+        # Untuk datetime
+        if dtype == "datetime64[ns]":
+            if not pd.api.types.is_datetime64_any_dtype(df[col]):
+                df[col] = pd.to_datetime(df[col], errors='coerce')
+        # Untuk numerik
+        elif dtype in [int, float]:
+            if not pd.api.types.is_numeric_dtype(df[col]):
+                df[col] = pd.to_numeric(df[col], errors='coerce')
+            # Untuk 'year' kita pastikan int
+            if dtype == int and df[col].notnull().all():
+                df[col] = df[col].astype('Int64')
+        # Untuk string/object
+        else:
+            if not pd.api.types.is_string_dtype(df[col]):
+                df[col] = df[col].astype(str)
+
 # --- Sidebar: filter ---
 st.sidebar.header("🔧 Filter")
 year_options = sorted(df["year"].unique())
