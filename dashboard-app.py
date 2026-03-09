@@ -155,7 +155,7 @@ st.markdown("""
 # --- Load data ---
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/main_data.csv")
+    df = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQVGpZVLvfhsAMIhn1tzuYRvQsZEZQD6XTs-0uyJis9PtYeDfyeGAXK-9hjZht24K7d0tI6dfCqjSFv/pub?gid=381439088&single=true&output=csv")
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
     df["order_month"] = df["order_purchase_timestamp"].dt.to_period("M").astype(str)
     df["year"] = df["order_purchase_timestamp"].dt.year
