@@ -188,8 +188,8 @@ st.markdown('<div class="main-title">E-Commerce Sales Dashboard</div>', unsafe_a
 st.markdown('<p class="subtitle">Tren penjualan bulanan, kategori produk unggulan, dan segmentasi pelanggan RFM</p>', unsafe_allow_html=True)
 
 # --- KPI row ---
-total_revenue = df_filtered["payment_value"].sum()
-total_orders = df_filtered["order_id"].nunique()
+total_revenue = df_filtered["payment_value"].sum().astype(float)
+total_orders = df_filtered["order_id"].nunique().astype(float)
 avg_order_value = (total_revenue / total_orders) if total_orders else 0.0
 
 col1, col2, col3 = st.columns(3)
